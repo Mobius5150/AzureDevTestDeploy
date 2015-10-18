@@ -1,7 +1,10 @@
-FROM alteroo/funkload
+FROM jordi/ab
 
 COPY ./tests /tests
 WORKDIR /tests
 
-CMD ["fl-run-bench", "test_Basic.py", "Basic.test_basic"]
+RUN apt-get update
+RUN apt-get install -y gnuplot
+
+CMD ["bash", "loadtest.sh"]
 

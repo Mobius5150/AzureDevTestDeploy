@@ -7,7 +7,7 @@
 # machine that this script is running on.
 ####################################################################
 
-source ./config.sh
+source script/config.sh
 
 echo '####################################################################'
 echo '# Build and Run Java REST API on the Dev machine ($DEV_MACHINE_NAME)'
@@ -20,6 +20,12 @@ echo '# Build and Run the Web Application on the Dev Machine ($DEV_MACHINE_NAME)
 echo '####################################################################'
 
 script/dev_web.sh
+
+echo '####################################################################'
+echo '# Build and Run the Web CI Application on the Dev Machine ($DEV_MACHINE_NAME)'
+echo '####################################################################'
+
+script/dev_web_ci.sh
 
 echo '####################################################################'
 echo '# Build and Run the load tester on the Dev Machine ($DEV_MACHINE_NAME)'
