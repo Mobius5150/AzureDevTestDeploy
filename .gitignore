@@ -1,8 +1,8 @@
 mycert.*
 java/target/*
 script/config.sh
-web_ci/www/html/benchmark.tsv
-web_ci/www/html/request_plot.jpg
+ci/www/html/benchmark.tsv
+ci/www/html/request_plot.jpg
 
 # Emacs files
 auto-save-list
