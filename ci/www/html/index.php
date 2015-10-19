@@ -6,8 +6,11 @@
     <h1>PHP Web Application Test Results</h1>
     <p>Test Host: <?php echo gethostname() ?>
     <?php
+      if (file_exists('load_test_in_progress')) :
+        ?><p>The load test is in progress...</p><script type="text/javascript">setTimeout(function () {window.location.reload(true);}, 2000);</script><?
+      else :
         $entryCount = 0;
-        $limit = 1;
+        $limit = 200;
         $entriesOverLimit = 0;
         $maxEntriesOverLimitPercent = 0.01;
 
@@ -26,15 +29,16 @@
         }
 
         $failedPercent = $entriesOverLimit/$entryCount;
-        $resultStr = 'Less than 1% of requests took longer than ' . number_format($limit) . 'ms. The load test was a success.';
+        $resultStr = "$entriesOverLimit/$entryCount (less than 1%) of requests took longer than " . number_format($limit) . 'ms. The load test was a success.';
         $style = '';
         if (($success = $failedPercent > $maxEntriesOverLimitPercent)) {
           $failedPercentStr = number_format($failedPercent * 100, 1);
-          $resultStr = "There were $entriesOverLimit requests ({$failedPercentStr}%) that took more than " . number_format($limit) . 'ms. The load test was a failure.';
+          $resultStr = "$entriesOverLimit/$entryCount requests ({$failedPercentStr}%) took more than " . number_format($limit) . 'ms. The load test was a failure.';
           $style = 'color: crimson;';
         }
     ?>
-    <p><span style="<?php echo $style; ?>"><?php echo $resultStr; ?></span></p>
-    <img src="request_plot.jpg" alt="Benchmark Result Graph" />
+      <p><span style="<?php echo $style; ?>"><?php echo $resultStr; ?></span></p>
+      <img src="request_plot.jpg" alt="Benchmark Result Graph" />
+    <? endif; ?>
   </body>
 </html>

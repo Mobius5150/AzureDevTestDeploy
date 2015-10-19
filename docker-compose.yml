@@ -1,21 +1,36 @@
 lb:
-  image: eeacms/haproxy
+  image: mblouin/eea.docker.haproxy
+  dns: 208.67.220.220
   ports:
     - "80:80"
     - "1936:1936"
   links:
     - web
+  environment:
+    - SERVICE_NAMES=azuredevtestdeploy_web
 web:
   build: web
+  dns: 208.67.220.220
   ports:
     - "80"
   links:
     - rest
+  volumes:
+    - ./web/prefork.conf:/etc/apache2/conf-enabled/prefork.conf
+ci:
+  build: ci
+  ports:
+    - "8888:80"
+  volumes:
+    - ./ci/www:/var/www
 rest:
   build: java
   ports:
     - "8080:8080"
 load_test:
   build: load_test
+  dns: 208.67.220.220
   links:
-    - web
+    - lb:web
+  volumes:
+    - ./ci/www/html:/var/www
