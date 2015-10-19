@@ -23,6 +23,6 @@ docker stop dev_load
 echo "Removing any previously (staged) load testing container"
 docker rm dev_load
 echo "Running a load testing container"
-docker run -t -d -v $(pwd)/../web_ci/www/html:/var/www --link dev_web_ci:web --name=dev_load load_test
+docker run -t -d -v $(pwd)/../ci/www/html:/var/www --link dev_web:web --name=dev_load load_test
 
 cd ..

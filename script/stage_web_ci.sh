@@ -1,0 +1,34 @@
+###########################################
+# Build and run the ci client application
+#
+# If docker-machine is present assume that
+# docker-machine is managing the docker
+# hosts and us that. Otherwise use the same
+# machine that this script is running on.
+###########################################
+
+source script/config.sh
+
+echo "Staging web ci client application version $WEB_STAGE_VERSION on $STAGE_MACHINE_NAME"
+eval "$(docker-machine env $STAGE_MACHINE_NAME)"
+docker info
+
+cd web
+
+# Build the container to ensure we pick up any changes
+docker build -t ci:$WEB_STAGE_VERSION .
+
+# Stop, remove and restart the container
+echo "Stopping any running (staged) web ci application containers"
+docker stop stage_ci
+docker stop stage_ci1
+docker stop stage_ci2
+echo "Removing any previously (staged) web ci application containers"
+docker rm stage_ci
+docker rm stage_ci1
+docker rm stage_ci2
+echo "Running web ci app containers"
+docker run -t -d --name=stage_ci1 ci:$WEB_STAGE_VERSION
+docker run -t -d --name=stage_ci2 ci:$WEB_STAGE_VERSION
+
+cd ..
