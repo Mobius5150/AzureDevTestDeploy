@@ -8,7 +8,7 @@
     <?php
       if (file_exists('load_test_in_progress')) :
         ?><p>The load test is in progress...</p><script type="text/javascript">setTimeout(function () {window.location.reload(true);}, 2000);</script><?
-      else :
+      elseif (file_exists('benchmark.tsv')) :
         $entryCount = 0;
         $limit = 200;
         $entriesOverLimit = 0;
@@ -39,6 +39,8 @@
     ?>
       <p><span style="<?php echo $style; ?>"><?php echo $resultStr; ?></span></p>
       <img src="request_plot.jpg" alt="Benchmark Result Graph" />
+    <? else: ?>
+      <p>The load test has not yet been run. Run the test to see the results here.</p>
     <? endif; ?>
   </body>
 </html>
