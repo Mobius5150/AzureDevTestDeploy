@@ -27,7 +27,7 @@ The helper scripts provided are configured in scripts/config.sh. You will
 need to create this file. We provide a template file to get you started
 with good defaults where we can. Start by copying the template:
 
-    $ cp script/config.tmpl config.sh
+    $ cp script/config.tmpl script/config.sh
     
 Now edit this file, being sure to change (at least) the
 STAGING_MACHINE_NAME which must be world unique.
