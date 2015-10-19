@@ -9,11 +9,11 @@
 
 source script/config.sh
 
-echo "Staging web ci client application version $WEB_STAGE_VERSION on $STAGE_MACHINE_NAME"
+echo "Staging ci client application version $WEB_STAGE_VERSION on $STAGE_MACHINE_NAME"
 eval "$(docker-machine env $STAGE_MACHINE_NAME)"
 docker info
 
-cd web
+cd ci
 
 # Build the container to ensure we pick up any changes
 docker build -t ci:$WEB_STAGE_VERSION .
