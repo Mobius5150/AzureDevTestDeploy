@@ -6,7 +6,17 @@
     <img src="image/Container-255x115.png" alt="Azure Container Service Logo" style="float:right"/>
     <h1>Hello from the PHP Web application</h1>
     <p>Host: <?php echo gethostname() ?>
-    <?php 
+    <?php
+
+       function fibonacci($n) {
+         if ($n === 0) return 0;
+	 if ($n === 1) return 1;
+
+	 return fibonacci($n - 1) + fibonacci($n - 2);
+       }
+
+       fibonacci(23);
+
        $service_url = 'http://rest:8080/JerseyHelloWorld/rest/helloworld';
        $curl = curl_init($service_url);
        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
