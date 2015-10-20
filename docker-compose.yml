@@ -1,6 +1,5 @@
 lb:
   image: mblouin/eea.docker.haproxy
-  dns: 208.67.220.220
   ports:
     - "80:80"
     - "1936:1936"
@@ -10,7 +9,6 @@ lb:
     - SERVICE_NAMES=azuredevtestdeploy_web
 web:
   build: web
-  dns: 208.67.220.220
   ports:
     - "80"
   links:
@@ -29,7 +27,6 @@ rest:
     - "8080:8080"
 load_test:
   build: load_test
-  dns: 208.67.220.220
   links:
     - lb:web
   volumes:
