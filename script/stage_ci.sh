@@ -21,14 +21,9 @@ docker build -t ci:$WEB_STAGE_VERSION .
 # Stop, remove and restart the container
 echo "Stopping any running (staged) web ci application containers"
 docker stop stage_ci
-docker stop stage_ci1
-docker stop stage_ci2
 echo "Removing any previously (staged) web ci application containers"
 docker rm stage_ci
-docker rm stage_ci1
-docker rm stage_ci2
 echo "Running web ci app containers"
 docker run -t -d --name=stage_ci1 ci:$WEB_STAGE_VERSION
-docker run -t -d --name=stage_ci2 ci:$WEB_STAGE_VERSION
 
 cd ..

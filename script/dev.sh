@@ -25,7 +25,7 @@ echo '####################################################################'
 echo '# Build and Run the Web CI Application on the Dev Machine ($DEV_MACHINE_NAME)'
 echo '####################################################################'
 
-script/dev_web_ci.sh
+script/dev_ci.sh
 
 echo '####################################################################'
 echo '# Build and Run the load tester on the Dev Machine ($DEV_MACHINE_NAME)'
