@@ -9,6 +9,6 @@ set format x "%S"
 set xlabel 'test progression (s)'
 set ylabel "response time (ms)"
 set datafile separator '\t'
-set unset key
-plot "benchmark.tsv" every ::2 using 2:5 title '' with points
+unset key
+plot "benchmark.tsv" every ::2 using 2:(($5 > 25 && $5 < 600) ? $5 : 1/0) title '' with points
 exit

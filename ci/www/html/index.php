@@ -10,17 +10,19 @@
         ?><p>The load test is in progress...</p><script type="text/javascript">setTimeout(function () {window.location.reload(true);}, 2000);</script><?
       elseif (file_exists('benchmark.tsv')) :
         $entryCount = 0;
+        $min = 50;
         $limit = 200;
         $entriesOverLimit = 0;
         $maxEntriesOverLimitPercent = 0.01;
 
         if (false !== ($file = fopen('benchmark.tsv', 'r'))) {
           while (false !== ($line = fgetcsv($file, 1000, "\t"))) {
-            if (++$entryCount === 0) {
+            $val = intval($line[4]);
+            if ($val < $min || ++$entryCount === 0) {
               continue;
             }
 
-            if (intval($line[4]) >= $limit) {
+            if ($val >= $limit) {
               ++$entriesOverLimit;
             }
           }

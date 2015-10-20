@@ -4,7 +4,7 @@ TIP_FILE=/var/www/load_test_in_progress
 touch $TIP_FILE
 
 # Warm up the server
-ab -t 5 http://web/
+ab -t 10 http://web/
 
 # Run the benchmark
 ab -c 5 -t 50 -g /var/www/benchmark.tsv http://web/
