@@ -28,4 +28,6 @@ RUN /usr/local/bin/plugins.sh /usr/share/jenkins/ref/plugins.txt
 COPY ./jenkins_home /var/jenkins_home
 
 # Declare environment variables
-ENV DOCKER_HOST=unix:///var/run/docker.sock
+ENV \
+    DOCKER_HOST=unix:///var/run/docker.sock \
+    DEV_REPO=/var/dev_repo
